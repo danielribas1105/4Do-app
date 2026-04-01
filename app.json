@@ -4,10 +4,10 @@
       "slug": "4Do-app",
       "version": "1.0.0",
       "orientation": "portrait",
-      "icon": "./assets/images/icon.png",
+      "icon": "./assets/icons/4do_icon_512.jpg",
       "userInterfaceStyle": "light",
       "splash": {
-         "image": "./assets/images/splash-icon.png",
+         "image": "./assets/icons/4do_icon_192.jpg",
          "resizeMode": "contain",
          "backgroundColor": "#F9FAFB"
       },
@@ -27,7 +27,7 @@
       },
       "web": {
          "output": "static",
-         "favicon": "./assets/images/favicon.png"
+         "favicon": "./assets/icons/4do_favicon.png"
       },
       "plugins": [
          "expo-router",

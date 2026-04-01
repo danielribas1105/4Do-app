@@ -118,7 +118,7 @@ export default function App() {
             {/* Header */}
             <View style={styles.header}>
                <View>
-                  <Text style={styles.appTitle}>Eisenhower</Text>
+                  <Text style={styles.appTitle}>4Do - Task Matrix</Text>
                   <Text style={styles.appSubtitle}>
                      {activeTotalCount} ativa{activeTotalCount !== 1 ? "s" : ""} ·{" "}
                      {completedTotalCount} concluída{completedTotalCount !== 1 ? "s" : ""}
