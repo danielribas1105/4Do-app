@@ -16,6 +16,7 @@ import { Colors } from "../constants/colors"
 import { QUADRANTS } from "../constants/quadrants"
 import { Task } from "../types/other-types"
 import { Quadrant } from "../types/quadrants-config"
+import { DateInput } from "./date-input"
 
 interface Props {
    visible: boolean
@@ -29,7 +30,7 @@ export function TaskModal({ visible, editTask, defaultQuadrant = "Q1", onSave, o
    const [title, setTitle] = useState("")
    const [description, setDescription] = useState("")
    const [quadrant, setQuadrant] = useState<Quadrant>(defaultQuadrant)
-   const [dueDate, setDueDate] = useState("")
+   const [dueDate, setDueDate] = useState<string | undefined>(undefined)
    const [tagInput, setTagInput] = useState("")
    const [tags, setTags] = useState<string[]>([])
 
@@ -38,7 +39,7 @@ export function TaskModal({ visible, editTask, defaultQuadrant = "Q1", onSave, o
          setTitle(editTask.title)
          setDescription(editTask.description || "")
          setQuadrant(editTask.quadrant)
-         setDueDate(editTask.dueDate ? editTask.dueDate.split("T")[0] : "")
+         setDueDate(editTask.dueDate ?? undefined)
          setTags(editTask.tags || [])
       } else {
          setTitle("")
@@ -60,7 +61,7 @@ export function TaskModal({ visible, editTask, defaultQuadrant = "Q1", onSave, o
          completed: editTask?.completed || false,
          createdAt: editTask?.createdAt || new Date().toISOString(),
          completedAt: editTask?.completedAt,
-         dueDate: dueDate ? new Date(dueDate).toISOString() : undefined,
+         dueDate: dueDate,
          tags: tags.length > 0 ? tags : undefined,
       }
       onSave(task)
@@ -183,15 +184,7 @@ export function TaskModal({ visible, editTask, defaultQuadrant = "Q1", onSave, o
                   {/* Due Date */}
                   <View style={styles.section}>
                      <Text style={styles.label}>Data de vencimento</Text>
-                     <TextInput
-                        style={styles.input}
-                        value={dueDate}
-                        onChangeText={setDueDate}
-                        placeholder="DD-MM-AAAA"
-                        placeholderTextColor={Colors.muted}
-                        keyboardType="numeric"
-                        maxLength={10}
-                     />
+                     <DateInput value={dueDate} onChange={setDueDate} />
                   </View>
 
                   {/* Tags */}
