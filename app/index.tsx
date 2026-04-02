@@ -6,6 +6,7 @@ import { QUADRANTS } from "@/src/constants/quadrants"
 import { useStorage } from "@/src/hooks/use-storage"
 import { AboutScreen } from "@/src/screens/about-screen"
 import { SettingsScreen } from "@/src/screens/settings-screen"
+import { SplashScreen } from "@/src/screens/splash-screen"
 import { FilterType, Task } from "@/src/types/other-types"
 import { Quadrant } from "@/src/types/quadrants-config"
 import { Ionicons } from "@expo/vector-icons"
@@ -44,6 +45,7 @@ export default function App() {
    const [editingTask, setEditingTask] = useState<Task | null>(null)
    const [defaultQ, setDefaultQ] = useState<Quadrant>("Q1")
    const [filter, setFilter] = useState<FilterType>("active")
+   const [showSplash, setShowSplash] = useState(true)
 
    const openNewTask = useCallback((quadrant: Quadrant) => {
       setEditingTask(null)
@@ -103,20 +105,24 @@ export default function App() {
    const activeTotalCount = tasks.filter((t) => !t.completed).length
    const completedTotalCount = tasks.filter((t) => t.completed).length
 
-   if (loading) {
+   /* if (loading) {
       return (
          <View style={styles.loading}>
             <Text style={styles.loadingEmoji}>⚡</Text>
             <Text style={styles.loadingText}>Carregando tarefas...</Text>
          </View>
       )
-   }
+   } */
 
    return (
       <SafeAreaProvider>
          <GestureHandlerRootView style={{ flex: 1 }}>
             <SafeAreaView style={styles.safe} edges={["top", "bottom"]}>
                <StatusBar barStyle="dark-content" backgroundColor={Colors.background} />
+
+               {showSplash && (
+                  <SplashScreen ready={!loading} onFinish={() => setShowSplash(false)} />
+               )}
 
                {/* Header */}
                <View style={styles.header}>
@@ -269,9 +275,9 @@ const styles = StyleSheet.create({
       backgroundColor: Colors.background,
       gap: 12,
    },
-   loadingEmoji: { fontSize: 40 },
+   loadingEmoji: { fontSize: 60 },
    loadingText: {
-      fontSize: 16,
+      fontSize: 20,
       color: Colors.muted,
       fontWeight: "600",
    },

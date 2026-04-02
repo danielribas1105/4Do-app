@@ -4,7 +4,7 @@ import { Colors } from "../constants/colors"
 export function AboutScreen() {
    return (
       <ScrollView style={styles.container} contentContainerStyle={styles.content}>
-         <Text style={styles.aboutTitle}>4Do - Matriz de Tarefas</Text>
+         <Text style={styles.aboutTitle}>4Do</Text>
          <View style={styles.about}>
             <Text style={styles.aboutText}>
                É um sistema de gestão e priorização de tarefas baseado na famosa matriz de
@@ -74,8 +74,9 @@ const styles = StyleSheet.create({
       gap: 8,
    },
    aboutTitle: {
-      fontSize: 20,
+      fontSize: 24,
       fontWeight: "800",
+      fontStyle: "italic",
       color: Colors.foreground,
       marginBottom: 4,
       letterSpacing: -0.5,

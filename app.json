@@ -6,11 +6,6 @@
       "orientation": "portrait",
       "icon": "./assets/icons/4do_icon_512_dark.jpg",
       "userInterfaceStyle": "light",
-      "splash": {
-         "image": "./assets/icons/4do_icon_192_dark.jpg",
-         "resizeMode": "contain",
-         "backgroundColor": "#F9FAFB"
-      },
       "assetBundlePatterns": ["**/*"],
       "ios": {
          "supportsTablet": true,

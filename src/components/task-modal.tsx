@@ -187,7 +187,7 @@ export function TaskModal({ visible, editTask, defaultQuadrant = "Q1", onSave, o
                         style={styles.input}
                         value={dueDate}
                         onChangeText={setDueDate}
-                        placeholder="AAAA-MM-DD"
+                        placeholder="DD-MM-AAAA"
                         placeholderTextColor={Colors.muted}
                         keyboardType="numeric"
                         maxLength={10}
@@ -263,7 +263,7 @@ const styles = StyleSheet.create({
       color: "#111827",
    },
    saveBtn: {
-      backgroundColor: "#111827",
+      backgroundColor: Colors.accent,
       borderRadius: 8,
       paddingHorizontal: 16,
       paddingVertical: 7,
@@ -318,7 +318,7 @@ const styles = StyleSheet.create({
       alignItems: "center",
    },
    addTagBtn: {
-      backgroundColor: "#111827",
+      backgroundColor: Colors.accent,
       borderRadius: 10,
       width: 42,
       height: 42,
