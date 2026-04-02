@@ -4,6 +4,7 @@ import { TaskModal } from "@/src/components/task-modal"
 import { Colors } from "@/src/constants/colors"
 import { QUADRANTS } from "@/src/constants/quadrants"
 import { useStorage } from "@/src/hooks/use-storage"
+import { AboutScreen } from "@/src/screens/about-screen"
 import { SettingsScreen } from "@/src/screens/settings-screen"
 import { FilterType, Task } from "@/src/types/other-types"
 import { Quadrant } from "@/src/types/quadrants-config"
@@ -21,7 +22,7 @@ import {
 import { GestureHandlerRootView } from "react-native-gesture-handler"
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context"
 
-type Tab = "matrix" | "settings"
+type Tab = "matrix" | "settings" | "about"
 
 export default function App() {
    const {
@@ -133,25 +134,31 @@ export default function App() {
 
                {/* Tab Bar */}
                <View style={styles.tabBar}>
-                  {(["matrix", "settings"] as Tab[]).map((tab) => (
+                  {(["matrix", "settings", "about"] as Tab[]).map((tab) => (
                      <TouchableOpacity
                         key={tab}
                         onPress={() => setActiveTab(tab)}
                         style={[styles.tab, activeTab === tab && styles.tabActive]}
                      >
                         <Ionicons
-                           name={tab === "matrix" ? "grid-outline" : "settings-outline"}
+                           name={
+                              tab === "matrix"
+                                 ? "grid-outline"
+                                 : tab === "settings"
+                                   ? "settings-outline"
+                                   : "information-circle-outline"
+                           }
                            size={16}
                            color={activeTab === tab ? Colors.foreground : Colors.muted}
                         />
                         <Text style={[styles.tabText, activeTab === tab && styles.tabTextActive]}>
-                           {tab === "matrix" ? "Matriz" : "Config"}
+                           {tab === "matrix" ? "Matriz" : tab === "settings" ? "Config" : "Sobre"}
                         </Text>
                      </TouchableOpacity>
                   ))}
                </View>
 
-               {activeTab === "matrix" ? (
+               {activeTab === "matrix" && (
                   <>
                      {/* Filter Pills */}
                      <View style={styles.filterRow}>
@@ -221,7 +228,8 @@ export default function App() {
                         <View style={{ height: 32 }} />
                      </ScrollView>
                   </>
-               ) : (
+               )}
+               {activeTab === "settings" && (
                   <SettingsScreen
                      taskCount={tasks.length}
                      lastBackupDate={lastBackupDate}
@@ -230,6 +238,7 @@ export default function App() {
                      onClearCompleted={handleClearCompleted}
                   />
                )}
+               {activeTab === "about" && <AboutScreen />}
 
                {/* Task Modal */}
                <TaskModal

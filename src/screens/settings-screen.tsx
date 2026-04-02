@@ -97,43 +97,6 @@ export function SettingsScreen({
                </Text>
             </TouchableOpacity>
          </View>
-
-         {/* About */}
-         <View style={styles.about}>
-            <Text style={styles.aboutTitle}>4Do - Task Matriz</Text>
-            <Text style={styles.aboutText}>
-               É um sistema de gestão e priorização de tarefas baseado na famosa matriz de
-               prioridades do presidente{" "}
-               <Text style={{ fontStyle: "italic", fontWeight: "600" }}>Dwight D. Eisenhower</Text>,
-               daí o nome{" "}
-               <Text style={{ fontStyle: "italic", fontWeight: "600" }}>Matriz de Eisenhower</Text>.
-            </Text>
-            <Text style={styles.aboutText}>
-               Essa matriz divide as tarefas em 4 quadrantes segundo urgência e importância. Ela
-               ajuda a decidir o que fazer imediatamente, agendar, delegar ou eliminar, focando no
-               que realmente gera valor e evitando a &quot;armadilha da urgência&quot;.
-            </Text>
-            <Text style={styles.aboutSubTitle}>Os Quatro Quadrantes:</Text>
-            <Text style={styles.aboutText}>
-               <Text style={{ fontWeight: "500" }}>1. Fazer (Urgente e Importante):</Text> Tarefas
-               com prazos imediatos e consequências sérias, como crises ou problemas.
-            </Text>
-            <Text style={styles.aboutText}>
-               <Text style={{ fontWeight: "500" }}>2. Agendar (Importante, mas Não Urgente):</Text>{" "}
-               Tarefas estratégicas de longo prazo, planejamento e desenvolvimento pessoal.
-            </Text>
-            <Text style={styles.aboutText}>
-               <Text style={{ fontWeight: "500" }}>3. Delegar (Urgente, mas Não Importante):</Text>{" "}
-               Interrupções, e-mails ou reuniões que outros podem resolver.
-            </Text>
-            <Text style={styles.aboutText}>
-               <Text style={{ fontWeight: "500" }}>
-                  4. Eliminar (Não Importante e Não Urgente):
-               </Text>{" "}
-               Distrações, atividades de desperdício de tempo.
-            </Text>
-            <Text style={styles.version}>v1.0.0</Text>
-         </View>
       </ScrollView>
    )
 }
