@@ -4,10 +4,10 @@
       "slug": "4Do-app",
       "version": "1.0.0",
       "orientation": "portrait",
-      "icon": "./assets/icons/4do_icon_512.jpg",
+      "icon": "./assets/icons/4do_icon_512_dark.jpg",
       "userInterfaceStyle": "light",
       "splash": {
-         "image": "./assets/icons/4do_icon_192.jpg",
+         "image": "./assets/icons/4do_icon_192_dark.jpg",
          "resizeMode": "contain",
          "backgroundColor": "#F9FAFB"
       },

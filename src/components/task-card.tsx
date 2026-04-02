@@ -3,6 +3,7 @@ import { format } from "date-fns"
 import { ptBR } from "date-fns/locale"
 import React, { useState } from "react"
 import { Alert, StyleSheet, Text, TouchableOpacity, View } from "react-native"
+import { Colors } from "../constants/colors"
 import { Task } from "../types/other-types"
 import { QuadrantConfig } from "../types/quadrants-config"
 
@@ -33,7 +34,7 @@ export function TaskCard({ task, quadrant, onToggle, onEdit, onDelete }: Props) 
          style={[
             styles.card,
             {
-               backgroundColor: task.completed ? "#F9FAFB" : "#FFFFFF",
+               backgroundColor: task.completed ? Colors.background : "#FFFFFF",
                borderLeftColor: quadrant.color,
                opacity: pressed ? 0.92 : 1,
                transform: [{ scale: pressed ? 0.985 : 1 }],
@@ -66,7 +67,7 @@ export function TaskCard({ task, quadrant, onToggle, onEdit, onDelete }: Props) 
                hitSlop={{ top: 8, bottom: 8, left: 8, right: 8 }}
                style={styles.deleteBtn}
             >
-               <Ionicons name="trash-outline" size={16} color="#9CA3AF" />
+               <Ionicons name="trash-outline" size={16} color={Colors.muted} />
             </TouchableOpacity>
          </View>
 
@@ -81,7 +82,7 @@ export function TaskCard({ task, quadrant, onToggle, onEdit, onDelete }: Props) 
          <View style={styles.footer}>
             {task.dueDate ? (
                <View style={styles.dueDateRow}>
-                  <Ionicons name="calendar-outline" size={11} color="#9CA3AF" />
+                  <Ionicons name="calendar-outline" size={11} color={Colors.muted} />
                   <Text style={styles.dueDate}>
                      {format(new Date(task.dueDate), "d MMM", { locale: ptBR })}
                   </Text>
@@ -142,7 +143,7 @@ const styles = StyleSheet.create({
    },
    titleCompleted: {
       textDecorationLine: "line-through",
-      color: "#9CA3AF",
+      color: Colors.muted,
    },
    deleteBtn: {
       padding: 2,
@@ -168,7 +169,7 @@ const styles = StyleSheet.create({
    },
    dueDate: {
       fontSize: 11,
-      color: "#9CA3AF",
+      color: Colors.muted,
    },
    tags: {
       flexDirection: "row",

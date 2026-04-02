@@ -1,6 +1,7 @@
 import { Ionicons } from "@expo/vector-icons"
 import React from "react"
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native"
+import { Colors } from "../constants/colors"
 import { Task } from "../types/other-types"
 import { QuadrantConfig } from "../types/quadrants-config"
 import { TaskCard } from "./task-card"
@@ -136,7 +137,7 @@ const styles = StyleSheet.create({
    },
    subtitle: {
       fontSize: 11,
-      color: "#9CA3AF",
+      color: Colors.muted,
       marginTop: 1,
    },
    headerRight: {

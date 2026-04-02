@@ -12,6 +12,7 @@ import {
    View,
 } from "react-native"
 import uuid from "react-native-uuid"
+import { Colors } from "../constants/colors"
 import { QUADRANTS } from "../constants/quadrants"
 import { Task } from "../types/other-types"
 import { Quadrant } from "../types/quadrants-config"
@@ -120,7 +121,7 @@ export function TaskModal({ visible, editTask, defaultQuadrant = "Q1", onSave, o
                         value={title}
                         onChangeText={setTitle}
                         placeholder="O que precisa ser feito?"
-                        placeholderTextColor="#9CA3AF"
+                        placeholderTextColor={Colors.muted}
                         autoFocus={!editTask}
                         maxLength={100}
                      />
@@ -134,7 +135,7 @@ export function TaskModal({ visible, editTask, defaultQuadrant = "Q1", onSave, o
                         value={description}
                         onChangeText={setDescription}
                         placeholder="Detalhes adicionais..."
-                        placeholderTextColor="#9CA3AF"
+                        placeholderTextColor={Colors.muted}
                         multiline
                         numberOfLines={3}
                         maxLength={500}
@@ -187,7 +188,7 @@ export function TaskModal({ visible, editTask, defaultQuadrant = "Q1", onSave, o
                         value={dueDate}
                         onChangeText={setDueDate}
                         placeholder="AAAA-MM-DD"
-                        placeholderTextColor="#9CA3AF"
+                        placeholderTextColor={Colors.muted}
                         keyboardType="numeric"
                         maxLength={10}
                      />
@@ -202,7 +203,7 @@ export function TaskModal({ visible, editTask, defaultQuadrant = "Q1", onSave, o
                            value={tagInput}
                            onChangeText={setTagInput}
                            placeholder="Ex: trabalho, pessoal..."
-                           placeholderTextColor="#9CA3AF"
+                           placeholderTextColor={Colors.muted}
                            onSubmitEditing={addTag}
                            returnKeyType="done"
                            maxLength={20}
@@ -283,7 +284,7 @@ const styles = StyleSheet.create({
       letterSpacing: 0.5,
    },
    input: {
-      backgroundColor: "#F9FAFB",
+      backgroundColor: Colors.background,
       borderWidth: 1,
       borderColor: "#E5E7EB",
       borderRadius: 10,

@@ -3,6 +3,7 @@ import { format } from "date-fns"
 import { ptBR } from "date-fns/locale"
 import React from "react"
 import { Alert, ScrollView, StyleSheet, Text, TouchableOpacity, View } from "react-native"
+import { Colors } from "../constants/colors"
 
 interface Props {
    taskCount: number
@@ -88,10 +89,10 @@ export function SettingsScreen({
 
          {/* Danger Zone */}
          <View style={[styles.card, styles.dangerCard]}>
-            <Text style={[styles.sectionTitle, { color: "#EF4444" }]}>Zona de Risco</Text>
+            <Text style={[styles.sectionTitle, { color: Colors.q1 }]}>Zona de Risco</Text>
             <TouchableOpacity onPress={handleClear} style={[styles.actionBtn, styles.dangerBtn]}>
-               <Ionicons name="trash-outline" size={18} color="#EF4444" />
-               <Text style={[styles.actionBtnText, { color: "#EF4444" }]}>
+               <Ionicons name="trash-outline" size={18} color={Colors.q1} />
+               <Text style={[styles.actionBtnText, { color: Colors.q1 }]}>
                   Limpar Tarefas Concluídas
                </Text>
             </TouchableOpacity>
@@ -99,11 +100,37 @@ export function SettingsScreen({
 
          {/* About */}
          <View style={styles.about}>
-            <Text style={styles.aboutTitle}>Matriz de Eisenhower</Text>
+            <Text style={styles.aboutTitle}>4Do - Task Matriz</Text>
             <Text style={styles.aboutText}>
-               Um sistema de gestão de tarefas baseado na famosa matriz de prioridades do presidente
-               Dwight D. Eisenhower — que divide as tarefas em 4 quadrantes segundo urgência e
-               importância.
+               É um sistema de gestão e priorização de tarefas baseado na famosa matriz de
+               prioridades do presidente{" "}
+               <Text style={{ fontStyle: "italic", fontWeight: "600" }}>Dwight D. Eisenhower</Text>,
+               daí o nome{" "}
+               <Text style={{ fontStyle: "italic", fontWeight: "600" }}>Matriz de Eisenhower</Text>.
+            </Text>
+            <Text style={styles.aboutText}>
+               Essa matriz divide as tarefas em 4 quadrantes segundo urgência e importância. Ela
+               ajuda a decidir o que fazer imediatamente, agendar, delegar ou eliminar, focando no
+               que realmente gera valor e evitando a &quot;armadilha da urgência&quot;.
+            </Text>
+            <Text style={styles.aboutSubTitle}>Os Quatro Quadrantes:</Text>
+            <Text style={styles.aboutText}>
+               <Text style={{ fontWeight: "500" }}>1. Fazer (Urgente e Importante):</Text> Tarefas
+               com prazos imediatos e consequências sérias, como crises ou problemas.
+            </Text>
+            <Text style={styles.aboutText}>
+               <Text style={{ fontWeight: "500" }}>2. Agendar (Importante, mas Não Urgente):</Text>{" "}
+               Tarefas estratégicas de longo prazo, planejamento e desenvolvimento pessoal.
+            </Text>
+            <Text style={styles.aboutText}>
+               <Text style={{ fontWeight: "500" }}>3. Delegar (Urgente, mas Não Importante):</Text>{" "}
+               Interrupções, e-mails ou reuniões que outros podem resolver.
+            </Text>
+            <Text style={styles.aboutText}>
+               <Text style={{ fontWeight: "500" }}>
+                  4. Eliminar (Não Importante e Não Urgente):
+               </Text>{" "}
+               Distrações, atividades de desperdício de tempo.
             </Text>
             <Text style={styles.version}>v1.0.0</Text>
          </View>
@@ -114,7 +141,7 @@ export function SettingsScreen({
 const styles = StyleSheet.create({
    container: {
       flex: 1,
-      backgroundColor: "#F9FAFB",
+      backgroundColor: Colors.background,
    },
    content: {
       padding: 20,
@@ -123,7 +150,7 @@ const styles = StyleSheet.create({
    pageTitle: {
       fontSize: 28,
       fontWeight: "800",
-      color: "#111827",
+      color: Colors.foreground,
       marginBottom: 4,
       letterSpacing: -0.5,
    },
@@ -146,7 +173,7 @@ const styles = StyleSheet.create({
    sectionTitle: {
       fontSize: 15,
       fontWeight: "700",
-      color: "#111827",
+      color: Colors.foreground,
    },
    sectionDesc: {
       fontSize: 13,
@@ -166,7 +193,7 @@ const styles = StyleSheet.create({
    statValue: {
       fontSize: 14,
       fontWeight: "700",
-      color: "#111827",
+      color: Colors.foreground,
    },
    actionBtn: {
       flexDirection: "row",
@@ -177,7 +204,7 @@ const styles = StyleSheet.create({
       paddingHorizontal: 16,
    },
    primaryBtn: {
-      backgroundColor: "#111827",
+      backgroundColor: Colors.foreground,
    },
    secondaryBtn: {
       backgroundColor: "#F3F4F6",
@@ -198,10 +225,17 @@ const styles = StyleSheet.create({
       fontWeight: "700",
       color: "#374151",
    },
+   aboutSubTitle: {
+      fontSize: 13,
+      fontWeight: "600",
+      textDecorationLine: "underline",
+      color: Colors.muted,
+   },
    aboutText: {
       fontSize: 13,
-      color: "#9CA3AF",
+      color: Colors.muted,
       lineHeight: 18,
+      textAlign: "justify",
    },
    version: {
       fontSize: 12,

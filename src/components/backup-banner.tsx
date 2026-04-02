@@ -1,6 +1,7 @@
 import { Ionicons } from "@expo/vector-icons"
 import React from "react"
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native"
+import { Colors } from "../constants/colors"
 
 interface Props {
    onBackup: () => void
@@ -45,7 +46,7 @@ const styles = StyleSheet.create({
    },
    subtitle: {
       fontSize: 11,
-      color: "#3B82F6",
+      color: Colors.q2,
       marginTop: 1,
    },
    backupBtn: {

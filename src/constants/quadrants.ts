@@ -1,4 +1,5 @@
 import { QuadrantConfig } from "../types/quadrants-config"
+import { Colors } from "./colors"
 
 export const QUADRANTS: QuadrantConfig[] = [
    {
@@ -6,7 +7,7 @@ export const QUADRANTS: QuadrantConfig[] = [
       label: "Fazer Agora",
       subtitle: "Urgente & Importante",
       emoji: "🔥",
-      color: "#EF4444",
+      color: Colors.q1,
       bgColor: "bg-red-50",
       borderColor: "border-red-200",
       textColor: "text-red-700",
@@ -17,7 +18,7 @@ export const QUADRANTS: QuadrantConfig[] = [
       label: "Agendar",
       subtitle: "Não Urgente & Importante",
       emoji: "🎯",
-      color: "#3B82F6",
+      color: Colors.q2,
       bgColor: "bg-blue-50",
       borderColor: "border-blue-200",
       textColor: "text-blue-700",
@@ -28,7 +29,7 @@ export const QUADRANTS: QuadrantConfig[] = [
       label: "Delegar",
       subtitle: "Urgente & Não Importante",
       emoji: "🤝",
-      color: "#F59E0B",
+      color: Colors.q3,
       bgColor: "bg-amber-50",
       borderColor: "border-amber-200",
       textColor: "text-amber-700",
@@ -39,7 +40,7 @@ export const QUADRANTS: QuadrantConfig[] = [
       label: "Eliminar",
       subtitle: "Não Urgente & Não Importante",
       emoji: "🗑️",
-      color: "#6B7280",
+      color: Colors.q4,
       bgColor: "bg-gray-50",
       borderColor: "border-gray-200",
       textColor: "text-gray-600",

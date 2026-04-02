@@ -1,6 +1,7 @@
 import { BackupBanner } from "@/src/components/backup-banner"
 import { QuadrantPanel } from "@/src/components/quadrant-panel"
 import { TaskModal } from "@/src/components/task-modal"
+import { Colors } from "@/src/constants/colors"
 import { QUADRANTS } from "@/src/constants/quadrants"
 import { useStorage } from "@/src/hooks/use-storage"
 import { SettingsScreen } from "@/src/screens/settings-screen"
@@ -10,7 +11,6 @@ import { Ionicons } from "@expo/vector-icons"
 import React, { useCallback, useState } from "react"
 import {
    Alert,
-   SafeAreaView,
    ScrollView,
    StatusBar,
    StyleSheet,
@@ -19,6 +19,7 @@ import {
    View,
 } from "react-native"
 import { GestureHandlerRootView } from "react-native-gesture-handler"
+import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context"
 
 type Tab = "matrix" | "settings"
 
@@ -111,153 +112,158 @@ export default function App() {
    }
 
    return (
-      <GestureHandlerRootView style={{ flex: 1 }}>
-         <SafeAreaView style={styles.safe}>
-            <StatusBar barStyle="dark-content" backgroundColor="#F9FAFB" />
+      <SafeAreaProvider>
+         <GestureHandlerRootView style={{ flex: 1 }}>
+            <SafeAreaView style={styles.safe} edges={["top", "bottom"]}>
+               <StatusBar barStyle="dark-content" backgroundColor={Colors.background} />
 
-            {/* Header */}
-            <View style={styles.header}>
-               <View>
-                  <Text style={styles.appTitle}>4Do - Task Matrix</Text>
-                  <Text style={styles.appSubtitle}>
-                     {activeTotalCount} ativa{activeTotalCount !== 1 ? "s" : ""} ·{" "}
-                     {completedTotalCount} concluída{completedTotalCount !== 1 ? "s" : ""}
-                  </Text>
-               </View>
-               <TouchableOpacity onPress={() => openNewTask("Q1")} style={styles.fabHeader}>
-                  <Ionicons name="add" size={22} color="#FFF" />
-               </TouchableOpacity>
-            </View>
-
-            {/* Tab Bar */}
-            <View style={styles.tabBar}>
-               {(["matrix", "settings"] as Tab[]).map((tab) => (
-                  <TouchableOpacity
-                     key={tab}
-                     onPress={() => setActiveTab(tab)}
-                     style={[styles.tab, activeTab === tab && styles.tabActive]}
-                  >
-                     <Ionicons
-                        name={tab === "matrix" ? "grid-outline" : "settings-outline"}
-                        size={16}
-                        color={activeTab === tab ? "#111827" : "#9CA3AF"}
-                     />
-                     <Text style={[styles.tabText, activeTab === tab && styles.tabTextActive]}>
-                        {tab === "matrix" ? "Matriz" : "Config"}
+               {/* Header */}
+               <View style={styles.header}>
+                  <View>
+                     <Text style={styles.appTitle}>4Do - Task Matrix</Text>
+                     <Text style={styles.appSubtitle}>
+                        {activeTotalCount} ativa{activeTotalCount !== 1 ? "s" : ""} ·{" "}
+                        {completedTotalCount} concluída{completedTotalCount !== 1 ? "s" : ""}
                      </Text>
-                  </TouchableOpacity>
-               ))}
-            </View>
-
-            {activeTab === "matrix" ? (
-               <>
-                  {/* Filter Pills */}
-                  <View style={styles.filterRow}>
-                     {(["all", "active", "completed"] as FilterType[]).map((f) => (
-                        <TouchableOpacity
-                           key={f}
-                           onPress={() => setFilter(f)}
-                           style={[styles.filterPill, filter === f && styles.filterPillActive]}
-                        >
-                           <Text
-                              style={[
-                                 styles.filterPillText,
-                                 filter === f && styles.filterPillTextActive,
-                              ]}
-                           >
-                              {f === "all" ? "Todas" : f === "active" ? "Ativas" : "Concluídas"}
-                           </Text>
-                        </TouchableOpacity>
-                     ))}
                   </View>
+                  <TouchableOpacity onPress={() => openNewTask("Q1")} style={styles.fabHeader}>
+                     <Ionicons name="add" size={22} color="#FFF" />
+                  </TouchableOpacity>
+               </View>
 
-                  <ScrollView
-                     style={styles.scroll}
-                     contentContainerStyle={styles.scrollContent}
-                     showsVerticalScrollIndicator={false}
-                  >
-                     {/* Backup Banner */}
-                     {backupSuggestion && (
-                        <BackupBanner onBackup={handleExport} onDismiss={dismissBackupSuggestion} />
-                     )}
+               {/* Tab Bar */}
+               <View style={styles.tabBar}>
+                  {(["matrix", "settings"] as Tab[]).map((tab) => (
+                     <TouchableOpacity
+                        key={tab}
+                        onPress={() => setActiveTab(tab)}
+                        style={[styles.tab, activeTab === tab && styles.tabActive]}
+                     >
+                        <Ionicons
+                           name={tab === "matrix" ? "grid-outline" : "settings-outline"}
+                           size={16}
+                           color={activeTab === tab ? Colors.foreground : Colors.muted}
+                        />
+                        <Text style={[styles.tabText, activeTab === tab && styles.tabTextActive]}>
+                           {tab === "matrix" ? "Matriz" : "Config"}
+                        </Text>
+                     </TouchableOpacity>
+                  ))}
+               </View>
 
-                     {/* Eisenhower Matrix Legend */}
-                     <View style={styles.matrixLegend}>
-                        <View style={styles.legendAxis}>
-                           <Text style={styles.legendAxisLabel}>↑ IMPORTANTE ↓</Text>
-                        </View>
-                        <View style={styles.legendAxisH}>
-                           <Text style={styles.legendAxisLabel}>← NÃO URGENTE · URGENTE →</Text>
-                        </View>
+               {activeTab === "matrix" ? (
+                  <>
+                     {/* Filter Pills */}
+                     <View style={styles.filterRow}>
+                        {(["all", "active", "completed"] as FilterType[]).map((f) => (
+                           <TouchableOpacity
+                              key={f}
+                              onPress={() => setFilter(f)}
+                              style={[styles.filterPill, filter === f && styles.filterPillActive]}
+                           >
+                              <Text
+                                 style={[
+                                    styles.filterPillText,
+                                    filter === f && styles.filterPillTextActive,
+                                 ]}
+                              >
+                                 {f === "all" ? "Todas" : f === "active" ? "Ativas" : "Concluídas"}
+                              </Text>
+                           </TouchableOpacity>
+                        ))}
                      </View>
 
-                     {/* Quadrant Panels */}
-                     {QUADRANTS.map((q) => {
-                        const filteredTasks =
-                           filter === "all"
-                              ? tasks.filter((t) => t.quadrant === q.id)
-                              : filter === "active"
-                                ? tasks.filter((t) => t.quadrant === q.id && !t.completed)
-                                : tasks.filter((t) => t.quadrant === q.id && t.completed)
-
-                        return (
-                           <QuadrantPanel
-                              key={q.id}
-                              quadrant={q}
-                              tasks={filteredTasks}
-                              onAddTask={() => openNewTask(q.id)}
-                              onToggle={toggleComplete}
-                              onEdit={openEdit}
-                              onDelete={deleteTask}
+                     <ScrollView
+                        style={styles.scroll}
+                        contentContainerStyle={styles.scrollContent}
+                        showsVerticalScrollIndicator={false}
+                     >
+                        {/* Backup Banner */}
+                        {backupSuggestion && (
+                           <BackupBanner
+                              onBackup={handleExport}
+                              onDismiss={dismissBackupSuggestion}
                            />
-                        )
-                     })}
+                        )}
 
-                     <View style={{ height: 32 }} />
-                  </ScrollView>
-               </>
-            ) : (
-               <SettingsScreen
-                  taskCount={tasks.length}
-                  lastBackupDate={lastBackupDate}
-                  onExport={handleExport}
-                  onImport={handleImport}
-                  onClearCompleted={handleClearCompleted}
+                        {/* Eisenhower Matrix Legend */}
+                        <View style={styles.matrixLegend}>
+                           <View style={styles.legendAxis}>
+                              <Text style={styles.legendAxisLabel}>↑ IMPORTANTE ↓</Text>
+                           </View>
+                           <View style={styles.legendAxisH}>
+                              <Text style={styles.legendAxisLabel}>← NÃO URGENTE · URGENTE →</Text>
+                           </View>
+                        </View>
+
+                        {/* Quadrant Panels */}
+                        {QUADRANTS.map((q) => {
+                           const filteredTasks =
+                              filter === "all"
+                                 ? tasks.filter((t) => t.quadrant === q.id)
+                                 : filter === "active"
+                                   ? tasks.filter((t) => t.quadrant === q.id && !t.completed)
+                                   : tasks.filter((t) => t.quadrant === q.id && t.completed)
+
+                           return (
+                              <QuadrantPanel
+                                 key={q.id}
+                                 quadrant={q}
+                                 tasks={filteredTasks}
+                                 onAddTask={() => openNewTask(q.id)}
+                                 onToggle={toggleComplete}
+                                 onEdit={openEdit}
+                                 onDelete={deleteTask}
+                              />
+                           )
+                        })}
+
+                        <View style={{ height: 32 }} />
+                     </ScrollView>
+                  </>
+               ) : (
+                  <SettingsScreen
+                     taskCount={tasks.length}
+                     lastBackupDate={lastBackupDate}
+                     onExport={handleExport}
+                     onImport={handleImport}
+                     onClearCompleted={handleClearCompleted}
+                  />
+               )}
+
+               {/* Task Modal */}
+               <TaskModal
+                  visible={modalVisible}
+                  editTask={editingTask}
+                  defaultQuadrant={defaultQ}
+                  onSave={handleSave}
+                  onClose={() => {
+                     setModalVisible(false)
+                     setEditingTask(null)
+                  }}
                />
-            )}
-
-            {/* Task Modal */}
-            <TaskModal
-               visible={modalVisible}
-               editTask={editingTask}
-               defaultQuadrant={defaultQ}
-               onSave={handleSave}
-               onClose={() => {
-                  setModalVisible(false)
-                  setEditingTask(null)
-               }}
-            />
-         </SafeAreaView>
-      </GestureHandlerRootView>
+            </SafeAreaView>
+         </GestureHandlerRootView>
+      </SafeAreaProvider>
    )
 }
 
 const styles = StyleSheet.create({
    safe: {
       flex: 1,
-      backgroundColor: "#F9FAFB",
+      backgroundColor: Colors.background,
    },
    loading: {
       flex: 1,
       alignItems: "center",
       justifyContent: "center",
-      backgroundColor: "#F9FAFB",
+      backgroundColor: Colors.background,
       gap: 12,
    },
    loadingEmoji: { fontSize: 40 },
    loadingText: {
       fontSize: 16,
-      color: "#9CA3AF",
+      color: Colors.muted,
       fontWeight: "600",
    },
    header: {
@@ -271,17 +277,17 @@ const styles = StyleSheet.create({
    appTitle: {
       fontSize: 28,
       fontWeight: "900",
-      color: "#111827",
+      color: Colors.foreground,
       letterSpacing: -0.8,
    },
    appSubtitle: {
       fontSize: 12,
-      color: "#9CA3AF",
+      color: Colors.muted,
       fontWeight: "500",
       marginTop: 2,
    },
    fabHeader: {
-      backgroundColor: "#111827",
+      backgroundColor: Colors.accent,
       width: 42,
       height: 42,
       borderRadius: 14,
@@ -321,10 +327,10 @@ const styles = StyleSheet.create({
    tabText: {
       fontSize: 13,
       fontWeight: "600",
-      color: "#9CA3AF",
+      color: Colors.muted,
    },
    tabTextActive: {
-      color: "#111827",
+      color: Colors.foreground,
    },
    filterRow: {
       flexDirection: "row",
@@ -339,7 +345,7 @@ const styles = StyleSheet.create({
       backgroundColor: "#F3F4F6",
    },
    filterPillActive: {
-      backgroundColor: "#111827",
+      backgroundColor: Colors.foreground,
    },
    filterPillText: {
       fontSize: 12,
